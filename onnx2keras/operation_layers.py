@@ -136,6 +136,7 @@ def convert_reduce_mean(node, params, layers, lambda_func, node_name, keras_name
 
     def target_layer(x, axis=params['axes'], keepdims=params['keepdims']):
         import tensorflow.keras.backend as K
+        axis = np.array(axis, dtype=np.int32)
         return K.mean(x, keepdims=(keepdims == 1), axis=axis)
 
     lambda_layer = keras.layers.Lambda(target_layer, name=keras_name)
